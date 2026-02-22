@@ -1,7 +1,9 @@
 public class IdUtil {
-    public static String nextStudentId(int currentCount) {
-        int next = currentCount + 1;
-        String num = String.format("%04d", next);
+    public static int IDCount = 1;
+
+    public static String nextStudentId() {
+        String num = String.format("%04d", IDCount);
+        IDCount++;
         return "SST-2026-" + num;
     }
 }
