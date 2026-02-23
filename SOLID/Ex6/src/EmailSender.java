@@ -3,10 +3,13 @@ public class EmailSender extends NotificationSender {
 
     @Override
     public void send(Notification n) {
-        // LSP smell: truncates silently, changing meaning
-        String body = n.body;
-        if (body.length() > 40) body = body.substring(0, 40);
-        System.out.println("EMAIL -> to=" + n.email + " subject=" + n.subject + " body=" + body);
+        String body = safe(n.body);
+        String subject = safe(n.subject);
+        String email = safe(n.email);
+        if(body.length() > 40){
+            System.out.println("EMAIL WARNING: body truncated to 40 chars");
+        }
+        System.out.println("EMAIL -> to=" + email + " subject=" + subject + " body=" + body);
         audit.add("email sent");
     }
 }
